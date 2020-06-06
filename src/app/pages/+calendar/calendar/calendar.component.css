@@ -1,0 +1,45 @@
+
+  .calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .semana {
+    display: flex;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+  }
+  .semana .nombre {
+    border: 1px solid rgb(189,189,189);
+    background-color: rgb(47,116,181);
+    color: white;
+    padding-top: 0.2rem;
+    height: 1.3rem;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 14px;
+    width: 7rem;
+
+  }
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width:52rem;
+  }
+
+  .days .day {
+    text-align: left;
+    padding-left: 1rem;
+    float: left;
+    height: 100px;
+    border: solid 1px  rgb(189,189,189);
+    font: bold;
+    width: 5.94rem;
+  }
+  .days .day.other {
+    color: rgb(189,189,189);
+  }

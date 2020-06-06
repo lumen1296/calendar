@@ -1,0 +1,21 @@
+<select [(ngModel)]="selected">
+    <option *ngFor="let mes of dataCalendar.meses" [ngValue]="mes.numero">{{mes.nombre}}</option>
+</select>
+<br>
+<br>
+<div class="calendar">
+    <div *ngIf="selected">
+        <div class="semana">
+            <div class="nombre" *ngFor="let dia of dataCalendar.semana">
+                {{dia}}
+            </div>
+        </div>
+
+        <tr class="days">
+            <th class="day" [ngClass]="{other: !item.current}" *ngFor="let item of drawCalendar(selected)">
+                {{item.day}}
+            </th>
+        </tr>
+
+    </div>
+</div>
