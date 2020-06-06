@@ -43,3 +43,13 @@
   .days .day.other {
     color: rgb(189,189,189);
   }
+
+  .days .day.weekend {
+    color:rgb(66,110,149);
+    background-color: rgb(241,241,241);
+  }
+
+  .days .day.weekendOther {
+    color: rgb(189,189,189);
+    background-color: rgb(241,241,241);
+  }

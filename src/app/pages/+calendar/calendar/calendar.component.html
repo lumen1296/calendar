@@ -12,7 +12,9 @@
         </div>
 
         <tr class="days">
-            <th class="day" [ngClass]="{other: !item.current}" *ngFor="let item of drawCalendar(selected)">
+            <th class="day" [ngClass]="{other: !item.current, weekend: (item.name==='Sun' || item.name==='Sat') && item.current,
+             weekendOther:(item.name==='Sun' || item.name==='Sat') && !item.current}" 
+                *ngFor="let item of drawCalendar(selected)">
                 {{item.day}}
             </th>
         </tr>

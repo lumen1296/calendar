@@ -8,7 +8,7 @@ import * as moment from 'moment';
 })
 export class CalendarComponent implements OnInit {
 
-dataCalendar = {
+  dataCalendar = {
     meses: [{
       nombre: 'Enero',
       numero: 1
@@ -58,38 +58,53 @@ dataCalendar = {
 
   drawCalendar(input) {
     if (input) {
-        const result = [];
-        const year = moment().year();
-        const startDay = moment(input + '/01/' + year, 'MM-DD-YYYY');
-        const endDay = startDay.clone().endOf('month');
-        const dayPrevMonth = startDay.clone().day(0).date();
-        const endPrevMonth = startDay.clone().day(0).endOf('month').date();
-        if (endPrevMonth - dayPrevMonth < 7) {
+      const result = [];
+      const year = moment().year();
+      const startDay = moment(input + '-' + '/01/' + '-' + year, 'MM-DD-YYYY');
+      const endDay = startDay.clone().endOf('month');
+      const dayPrevMonth = startDay.clone().day(0).date();
+      const endPrevMonth = startDay.clone().day(0).endOf('month').date();
+      if (endPrevMonth - dayPrevMonth < 7) {
+        if (input === 1) {
           for (let i = dayPrevMonth; i <= endPrevMonth; i++) {
             result.push({
               day: i,
-              current: false
+              current: false,
+              name: String(moment(12 + '-' + ('0' + i).slice(-2) + '-' + Number(year - 1),
+                'MM-DD-YYYY')).substring(0, 3)
+            });
+          }
+        } else {
+          for (let i = dayPrevMonth; i <= endPrevMonth; i++) {
+            result.push({
+              day: i,
+              current: false,
+              name: String(moment(('0' + Number(input - 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year,
+                'MM-DD-YYYY')).substring(0, 3)
             });
           }
         }
-        const days = startDay.daysInMonth();
-        for (let i = 0; i < days; i++) {
-          result.push({
-            day: i + 1,
-            current: true
-          });
-        }
-
-        const endNextWeek = endDay.clone().day(7).date();
-        for (let i = 1; i < endNextWeek; i++) {
-          result.push({
-            day: i,
-            current: false
-          });
-        }
-
-        return result;
       }
+      const days = startDay.daysInMonth();
+      for (let i = 0; i < days; i++) {
+        result.push({
+          day: i + 1,
+          current: true,
+          name: String(moment(('0' + input).slice(-2) + '-' + ('0' + Number(i + 1)).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3)
+        });
+      }
+
+      const endNextWeek = endDay.clone().day(7).date();
+      for (let i = 1; i < endNextWeek; i++) {
+        result.push({
+          day: i,
+          current: false,
+          name: String(moment(('0' + Number(input + 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3)
+        });
+      }
+
+      return result;
+    }
   }
 
   ngOnInit(): void {
