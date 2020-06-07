@@ -1,4 +1,55 @@
-<div>
- sglksnglskndg
-</div>
+<div class="modal">
+    <div class="square">
+        <div class="header">
+            <div class="title">Add New Reminder</div>
+            <div class="close">X</div>
+        </div>
+        <div class="reminder">
+            <input type="text" maxlength="30" placeholder="Add Title">
+        </div>
 
+        <div class="dropdown">
+            <button class="dropbtn"  ngDefaultControl  [(ngModel)]="colorSelected" [ngStyle]="{'background-color':colorSelected.color}">
+                <div class="contentDrop">{{colorSelected.name}}
+                </div>
+            </button>
+            <div class="dropdown-content">
+                <div *ngFor="let color of defaultColors"
+                    (click)="colorSelected.color=color.color;colorSelected.name=color.name"
+                    [ngStyle]="{'background-color':color.color}">
+                    <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.3rem'}">{{color.name}}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="time">
+            <i class="fas fa-clock clockIcon"></i>
+            <input type="time" min="00:00" max="23:59" required>
+            <input type="time" min="00:00" max="23:59" required>
+        </div>
+
+
+
+        <div class="dropdownCity">
+            <button class="dropbtnCity" [(ngModel)]="citySelected" >
+                <div class="btnCity">
+                <i class="fas fa-building"></i>
+                <div class="contentDropCity" [ngStyle]="{'color': 'rgb(110, 110, 110)','font-size': '1.3rem'}">{{citySelected}}
+                </div>
+            </div>
+            </button>
+
+            <div class="dropdown-contentCity">
+                <div *ngFor="let city of defaultCity" (click)="citySelected=city">
+                    <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.4rem'}">{{city}}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>

@@ -10,14 +10,15 @@
                 {{dia}}
             </div>
         </div>
-
         <tr class="days">
-            <th class="day" [ngClass]="{other: !item.current, weekend: (item.name==='Sun' || item.name==='Sat') && item.current,
-             weekendOther:(item.name==='Sun' || item.name==='Sat') && !item.current}" 
+            <th class="day" (click)="showModal()" [ngClass]="{other: !item.current, weekend: (item.name==='Sun' || item.name==='Sat') && item.current,
+             weekendOther:(item.name==='Sun' || item.name==='Sat') && !item.current}"
                 *ngFor="let item of drawCalendar(selected)">
                 {{item.day}}
             </th>
         </tr>
-
     </div>
+</div>
+    <div class="modal" *ngIf="modal">
+    <app-modal></app-modal>
 </div>

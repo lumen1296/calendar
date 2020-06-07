@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from '@pages/+modal/modal.module';
 
 
 const CalendarRoutes = [
@@ -15,7 +16,8 @@ const CalendarRoutes = [
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule.forChild(CalendarRoutes)
+    RouterModule.forChild(CalendarRoutes),
+    ModalModule
   ]
 })
 export class CalendarModule { }

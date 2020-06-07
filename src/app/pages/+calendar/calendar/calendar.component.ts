@@ -48,12 +48,14 @@ export class CalendarComponent implements OnInit {
     }],
     semana: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   };
-
-
-  selected = [];
+  selected = '';
+  modal = false;
 
   constructor() { }
 
+  showModal(){
+    this.modal = true;
+  }
 
 
   drawCalendar(input) {
