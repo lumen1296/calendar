@@ -2,26 +2,32 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
+## Install dependencies
+Run `npm install`
+  
+
 ## Development server
+Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
+ * Select the month you want to render
+![Captura de pantalla (21)](https://user-images.githubusercontent.com/21350667/83992608-7f663200-a916-11ea-8d12-265f0f0c26e9.png)
 
-## Code scaffolding
+ * Render month whit laboral days
+![Captura de pantalla (22)](https://user-images.githubusercontent.com/21350667/83992643-9ad13d00-a916-11ea-91f4-782da49b4a59.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ * Add a reminder
+![Captura de pantalla (23)](https://user-images.githubusercontent.com/21350667/83992772-05827880-a917-11ea-8e1f-9aab28cf149c.png)
 
-## Build
+* Draw reminder on the calendar
+![Captura de pantalla (25)](https://user-images.githubusercontent.com/21350667/83992813-35ca1700-a917-11ea-94d2-8709fab9b866.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* Edit reminder
+![Captura de pantalla (26)](https://user-images.githubusercontent.com/21350667/83992858-4e3a3180-a917-11ea-920a-7d27e998a768.png)
 
-## Running unit tests
+## Used libraries
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* NGRX
+* Angular Material
+* MomentJS
+* ngx-material-timepicker
