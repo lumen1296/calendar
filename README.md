@@ -31,3 +31,4 @@ Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The ap
 * Angular Material
 * MomentJS
 * ngx-material-timepicker
+* API worldweatheronline
