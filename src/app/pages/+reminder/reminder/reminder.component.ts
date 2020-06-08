@@ -113,6 +113,11 @@ export class ReminderComponent implements OnInit, OnDestroy {
   getForecast() {
     this.forecastService.getForest(this.citySelected, this.date).subscribe((data: any) => {
       this.foreCast = data.data.current_condition[0].weatherDesc[0].value;
+    });
+  }
+
+  getForecastActual() {
+    this.forecastService.getForest(this.citySelected, this.date).subscribe((data: any) => {
       this.actualreminder.foreCast = data.data.current_condition[0].weatherDesc[0].value;
     });
   }
@@ -130,6 +135,10 @@ export class ReminderComponent implements OnInit, OnDestroy {
   updateActualReminder(reminder: Reminder){
 
     this.actualreminder = {...reminder};
+  }
+
+  editTitle(event){
+    this.actualreminder.title = event;
   }
 
   modifyReminder(reminder: Reminder) {

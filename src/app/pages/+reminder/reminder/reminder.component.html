@@ -13,11 +13,6 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-
-                <div class="reminder">
-                    <input type="text" ngDefaultControl [(ngModel)]="actualreminder.title" maxlength="30" placeholder="actualreminder.title">
-                </div>
-        
                 <div class="dropdown">
                     <button class="dropbtn" ngDefaultControl [(ngModel)]="actualreminder.color"
                         [ngStyle]="{'background-color':actualreminder.color.color}">
@@ -54,7 +49,7 @@
                     </button>
         
                     <div class="dropdown-contentCity">
-                        <div *ngFor="let city of defaultCity" (click)="actualreminder.city=city;getForecast()">
+                        <div *ngFor="let city of defaultCity" (click)="actualreminder.city=city;getForecastActual()">
                             <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.4rem'}">{{city}}</div>
                         </div>
                     </div>
