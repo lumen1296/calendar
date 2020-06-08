@@ -1,0 +1,137 @@
+<div class="modal">
+    <div class="square">
+        <div class="header">
+            <div class="title">Reminders</div>
+            <div class="close" (click)="sendMessage()">X</div>
+        </div>
+
+        <mat-accordion *ngIf="actualReminders" >
+            <mat-expansion-panel *ngFor="let reminder of actualReminders" (opened)="updateActualReminder(reminder)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                       {{reminder.title}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+
+                <div class="reminder">
+                    <input type="text" ngDefaultControl [(ngModel)]="actualreminder.title" maxlength="30" placeholder="actualreminder.title">
+                </div>
+        
+                <div class="dropdown">
+                    <button class="dropbtn" ngDefaultControl [(ngModel)]="actualreminder.color"
+                        [ngStyle]="{'background-color':actualreminder.color.color}">
+                        <div class="contentDrop">{{actualreminder.color.name}}
+                        </div>
+                    </button>
+                    <div class="dropdown-content">
+                        <div *ngFor="let color of defaultColors"
+                            (click)="actualreminder.color=color"
+                            [ngStyle]="{'background-color':color.color}">
+                            <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.3rem'}">{{color.name}}</div>
+                        </div>
+                    </div>
+                </div>
+        
+
+        
+                <div class="time">
+                    <i class="fa fa-clock-o clockIcon"></i>
+                    <input [ngxTimepicker]="picker" [(ngModel)]="actualreminder.time">
+                    <ngx-material-timepicker #picker></ngx-material-timepicker>
+                </div>
+        
+        
+        
+                <div class="dropdownCity">
+                    <button class="dropbtnCity" ngDefaultControl [(ngModel)]="citySelected">
+                        <div class="btnCity">
+                            <i class="fa fa-building"></i>
+                            <div class="contentDropCity" [ngStyle]="{'color': 'rgb(110, 110, 110)','font-size': '1.3rem'}">
+                                {{actualreminder.city}}
+                            </div>
+                        </div>
+                    </button>
+        
+                    <div class="dropdown-contentCity">
+                        <div *ngFor="let city of defaultCity" (click)="actualreminder.city=city;getForecast()">
+                            <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.4rem'}">{{city}}</div>
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <div class='forecast'>
+                    <i class="fa fa-sun-o forecastIcon"></i>
+                    <div class="forecastText">{{actualreminder.foreCast}}</div>
+        
+                </div>
+                <div class="save">
+                    <div class="saveButton" (click)="modifyReminder(actualreminder);sendMessage()">Save
+                    </div>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="reminder">
+            <input type="text" ngDefaultControl [(ngModel)]="reminder.title" maxlength="30" placeholder="Add Title">
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn" ngDefaultControl [(ngModel)]="colorSelected"
+                [ngStyle]="{'background-color':colorSelected.color}">
+                <div class="contentDrop">{{colorSelected.name}}
+                </div>
+            </button>
+            <div class="dropdown-content">
+                <div *ngFor="let color of defaultColors"
+                    (click)="colorSelected.color=color.color;colorSelected.name=color.name"
+                    [ngStyle]="{'background-color':color.color}">
+                    <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.3rem'}">{{color.name}}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="time">
+            <i class="fa fa-clock-o clockIcon"></i>
+            <input [ngxTimepicker]="picker" [(ngModel)]="reminder.time">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+        </div>
+
+
+
+        <div class="dropdownCity">
+            <button class="dropbtnCity" ngDefaultControl [(ngModel)]="citySelected">
+                <div class="btnCity">
+                    <i class="fa fa-building"></i>
+                    <div class="contentDropCity" [ngStyle]="{'color': 'rgb(110, 110, 110)','font-size': '1.3rem'}">
+                        {{citySelected}}
+                    </div>
+                </div>
+            </button>
+
+            <div class="dropdown-contentCity">
+                <div *ngFor="let city of defaultCity" (click)="citySelected=city;getForecast()">
+                    <div [ngStyle]="{'margin':'1rem 0 0 3.3rem','font-size': '1.4rem'}">{{city}}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='forecast'>
+            <i class="fa fa-sun-o forecastIcon"></i>
+            <div class="forecastText" >{{foreCast}}</div>
+
+        </div>
+        <div class="save">
+            <div class="saveButton" (click)="addReminder();sendMessage()">Save
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

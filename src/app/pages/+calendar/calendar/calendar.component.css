@@ -4,6 +4,20 @@
   align-items: center;
   width: 100%;
 }
+.month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.monthText {
+  font-size: 1.3rem;
+  color: rgb(110, 110, 110);
+  font-family: sans-serif;
+  margin-right: 2rem;
+}
 .semana {
   display: flex;
   font-weight: bolder;
@@ -39,7 +53,7 @@
   width: 5.94rem;
 }
 
-.days .day:hover{
+.days .day:hover {
   background-color: rgb(201, 201, 201);
   cursor: pointer;
 }
@@ -47,9 +61,10 @@
 .days .day.other {
   color: rgb(189, 189, 189);
   cursor: auto;
+  pointer-events: none;
 }
 .days .day.other:hover {
-  background-color:transparent;
+  background-color: transparent;
 }
 
 .days .day.weekend {
@@ -58,21 +73,19 @@
   cursor: pointer;
 }
 
-.days .day.weekend:hover{
+.days .day.weekend:hover {
   background-color: rgb(201, 201, 201);
 }
-
 
 .days .day.weekendOther {
   color: rgb(189, 189, 189);
   background-color: rgb(241, 241, 241);
   cursor: auto;
+  pointer-events: none;
 }
 .days .day.weekendOther:hover {
   background-color: rgb(241, 241, 241);
 }
-
-
 
 .modal {
   z-index: 3;
@@ -85,4 +98,12 @@
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.reminder {
+  height: 1rem;
+  width: 1rem;
+  margin: 3.5rem 0 0 4rem;
+  border-radius: 50px;
+  background-color: rgb(42, 141, 207);
 }

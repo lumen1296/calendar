@@ -1,60 +1,87 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import * as fromReminderReducer from '@redux/reminder/reducers';
+import { Reminder } from '@redux/reminder/models/reminder.model';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
+
+  subscription: Subscription;
+  constructor(private store: Store<fromReminderReducer.State>) { }
+
+  reminder: Reminder = {
+    date: '',
+    title: '',
+    color: {
+      color: '',
+      name: ''
+    },
+    city: '',
+    time: '',
+    foreCast: '',
+  };
+
+  reminders: Reminder[] = [
+    { ...this.reminder }
+  ];
+
+  modal = false;
 
   dataCalendar = {
     meses: [{
-      nombre: 'Enero',
+      nombre: 'January',
       numero: 1
     }, {
-      nombre: 'Febrero',
+      nombre: 'February',
       numero: 2
     }, {
-      nombre: 'Marzo',
+      nombre: 'March',
       numero: 1
     }, {
-      nombre: 'Abril',
+      nombre: 'April',
       numero: 4
     }, {
-      nombre: 'Mayo',
+      nombre: 'May',
       numero: 5
     }, {
-      nombre: 'Junio',
+      nombre: 'June',
       numero: 6
     }, {
-      nombre: 'Julio',
+      nombre: 'July',
       numero: 7
     }, {
-      nombre: 'Agosto',
+      nombre: 'August',
       numero: 8
     }, {
-      nombre: 'Septiembre',
+      nombre: 'September',
       numero: 9
     }, {
-      nombre: 'Octubre',
+      nombre: 'October',
       numero: 10
     }, {
-      nombre: 'Noviembre',
+      nombre: 'November',
       numero: 11
     }, {
-      nombre: 'Diciembre',
+      nombre: 'December',
       numero: 12
     }],
     semana: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   };
   selected = '';
-  modal = false;
+  date: any;
 
-  constructor() { }
-
-  showModal(){
+  showModal() {
     this.modal = true;
+  }
+
+  closeModal($event) {
+    this.modal = $event;
   }
 
 
@@ -73,7 +100,8 @@ export class CalendarComponent implements OnInit {
               day: i,
               current: false,
               name: String(moment(12 + '-' + ('0' + i).slice(-2) + '-' + Number(year - 1),
-                'MM-DD-YYYY')).substring(0, 3)
+                'MM-DD-YYYY')).substring(0, 3),
+              date: String(moment(12 + '-' + ('0' + i).slice(-2) + '-' + Number(year - 1), 'MM-DD-YYYY').format('YYYY-MM-DD'))
             });
           }
         } else {
@@ -82,7 +110,9 @@ export class CalendarComponent implements OnInit {
               day: i,
               current: false,
               name: String(moment(('0' + Number(input - 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year,
-                'MM-DD-YYYY')).substring(0, 3)
+                'MM-DD-YYYY')).substring(0, 3),
+              date: String(moment(('0' + Number(input - 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year,
+                'MM-DD-YYYY').format('YYYY-MM-DD'))
             });
           }
         }
@@ -92,7 +122,8 @@ export class CalendarComponent implements OnInit {
         result.push({
           day: i + 1,
           current: true,
-          name: String(moment(('0' + input).slice(-2) + '-' + ('0' + Number(i + 1)).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3)
+          name: String(moment(('0' + input).slice(-2) + '-' + ('0' + Number(i + 1)).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3),
+          date: String(moment(('0' + input).slice(-2) + '-' + ('0' + Number(i + 1)).slice(-2) + '-' + year, 'MM-DD-YYYY').format('YYYY-MM-DD'))
         });
       }
 
@@ -101,7 +132,8 @@ export class CalendarComponent implements OnInit {
         result.push({
           day: i,
           current: false,
-          name: String(moment(('0' + Number(input + 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3)
+          name: String(moment(('0' + Number(input + 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year, 'MM-DD-YYYY')).substring(0, 3),
+          date: String(moment(('0' + Number(input + 1)).slice(-2) + '-' + ('0' + i).slice(-2) + '-' + year, 'MM-DD-YYYY').format('YYYY-MM-DD'))
         });
       }
 
@@ -109,9 +141,25 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  drawReminder(date: string): boolean {
+    const dateFilter = this.reminders.filter((item) => item.date === date);
+    return dateFilter.length > 0;
   }
 
+
+  ngOnInit(): void {
+    console.log(this.date);
+    this.subscription = this.store.pipe(select(fromReminderReducer.selectReminder)).subscribe(res => {
+      if (res && res.reminder) {
+        this.reminders = res.reminder;
+      }
+    });
+  }
+
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
 
 }

@@ -22,9 +22,7 @@
       "@services/*": ["app/services/*"],
       "@shared/*": ["app/shared/*"],
       "@config/*": ["app/config/*"],
-      "@app/env": [
-        "environments/environment"
-      ]
+      "@env": ["environments/*"]
     }
   },
   "angularCompilerOptions": {

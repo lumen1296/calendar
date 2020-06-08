@@ -1,8 +1,12 @@
-<select [(ngModel)]="selected">
-    <option *ngFor="let mes of dataCalendar.meses" [ngValue]="mes.numero">{{mes.nombre}}</option>
-</select>
-<br>
-<br>
+<diV class="month">
+    <div class="monthText">
+        Select Month
+    </div>
+    <select [(ngModel)]="selected">
+        <option *ngFor="let mes of dataCalendar.meses" [ngValue]="mes.numero">{{mes.nombre}}</option>
+    </select>
+</diV>
+
 <div class="calendar">
     <div *ngIf="selected">
         <div class="semana">
@@ -11,14 +15,15 @@
             </div>
         </div>
         <tr class="days">
-            <th class="day" (click)="showModal()" [ngClass]="{other: !item.current, weekend: (item.name==='Sun' || item.name==='Sat') && item.current,
+            <th class="day" (click)="showModal();date=item.date" [ngClass]="{other: !item.current, weekend: (item.name==='Sun' || item.name==='Sat') && item.current,
              weekendOther:(item.name==='Sun' || item.name==='Sat') && !item.current}"
                 *ngFor="let item of drawCalendar(selected)">
                 {{item.day}}
+                <div class="reminder" *ngIf="drawReminder(item.date)"></div>
             </th>
         </tr>
     </div>
 </div>
-    <div class="modal" *ngIf="modal">
-    <app-modal></app-modal>
+<div class="modal" *ngIf="modal">
+    <app-reminder (closeModal)="closeModal($event)" [date]="date"></app-reminder>
 </div>
